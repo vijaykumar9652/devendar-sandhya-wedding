@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<title>Banoth Devendar ♡ Sandhya — Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0118; font-family: 'Lato', sans-serif; overflow-x: hidden; }
+
+  /* --- RINGS SPLASH (REALISTIC 3D) --- */
+  .rings-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #140b2e 0%, #03000a 100%);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .rings-container {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+  }
+  @media (min-width: 768px) { .rings-container { width: 420px; height: 420px; } }
+
+  .ring {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.02s linear;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  @media (min-width: 768px) { .ring { width: 190px; height: 190px; } }
+
+  .ring-left {
+    left: 10px;
+    background: radial-gradient(circle at 35% 35%, rgba(255,215,0,0.25), rgba(255,200,50,0.05));
+    box-shadow: 0 0 0 4px #f5c842, 0 0 0 10px rgba(245,200,66,0.3), 0 0 30px rgba(245,200,66,0.4), inset 0 0 20px rgba(255,215,0,0.2);
+    backdrop-filter: blur(2px);
+  }
+  .ring-right {
+    right: 10px;
+    background: radial-gradient(circle at 65% 35%, rgba(168,85,247,0.25), rgba(138,43,226,0.05));
+    box-shadow: 0 0 0 4px #c084fc, 0 0 0 10px rgba(168,85,247,0.3), 0 0 30px rgba(168,85,247,0.4), inset 0 0 20px rgba(192,132,252,0.2);
+    backdrop-filter: blur(2px);
+  }
+
+  .ring-inner {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: rgba(255,240,180,0.15);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-family: 'Cinzel', serif;
+    color: #fff3cc;
+    text-shadow: 0 0 10px gold;
+  }
+  .ring-left .ring-inner { border: 2px solid #ffd966; box-shadow: 0 0 20px #f5c842; }
+  .ring-right .ring-inner { border: 2px solid #d8b4fe; box-shadow: 0 0 20px #a855f7; }
+
+  .collision-spark {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff5cc, #ffcc44, #ff66cc);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    transition: all 0.15s ease;
+    box-shadow: 0 0 40px 15px #ffaa33;
+  }
+
+  .rings-message {
+    margin-top: 35px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 2px;
+    color: rgba(245,200,66,0.9);
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  .invite-btn {
+    margin-top: 32px;
+    background: linear-gradient(135deg, #f5c842, #d4a017);
+    border: none;
+    padding: 14px 44px;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #1a0a35;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0 0 25px rgba(245,200,66,0.7);
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    z-index: 10001;
+  }
+  .invite-btn.reveal-invite { opacity: 1; transform: scale(1); pointer-events: auto; cursor: pointer; }
+  .invite-btn:hover { transform: scale(1.05); box-shadow: 0 0 45px #f5c842; background: linear-gradient(135deg, #ffde7a, #e6b422); }
+
+  /* MAIN CONTENT */
+  .main-wedding-content { opacity: 0; visibility: hidden; transition: opacity 0.8s ease 0.2s; }
+  .main-wedding-content.visible-main { opacity: 1; visibility: visible; }
+
+  :root {
+    --gold: #f5c842;
+    --gold-light: #ffe98a;
+    --gold-dark: #c9960a;
+    --violet-mid: #7c3aed;
+    --violet-light: #a855f7;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .ornament::before, .ornament::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .ornament-diamond { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    background: linear-gradient(160deg, #02051a 0%, #060d2e 40%, #080418 70%, #02051a 100%);
+
+  }
+  .hero-content { text-align: center; max-width: 800px; z-index: 2; }
+  .hero-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase; }
+  .hero-names {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(1.8rem, 6.5vw, 3.2rem);
+  font-weight: 700;        /* changed from 100 to 700 */
+  letter-spacing: 0.18em;  /* slightly tighter for bold */
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.hero-names .groom,
+.hero-names .bride {
+  display: block;
+  background: linear-gradient(180deg,
+    #ffffff 0%, #dce9ff 25%, #7b9fff 55%, #c8d8ff 80%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(120,160,255,0.65))
+          drop-shadow(0 0 40px rgba(100,140,255,0.3));
+  text-align: center;
+}
+.hero-names em {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.45em;
+  letter-spacing: 0.2em;
+  -webkit-text-fill-color: #a8c4ff;
+  color: #a8c4ff;
+  opacity: 0.85;
+  margin: 10px 0;
+  filter: none;
+}
+.hero-names em::before,
+.hero-names em::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, #7b9fff);
+}
+.hero-names em::after {
+  background: linear-gradient(90deg, #7b9fff, transparent);
+}
+  .cute-line { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #fff0c0; margin-top: 20px; font-style: italic; text-shadow: 0 0 8px rgba(0,0,0,0.5); background: rgba(0,0,0,0.4); display: inline-block; padding: 8px 24px; border-radius: 60px; backdrop-filter: blur(6px); border: 1px solid rgba(245,200,66,0.4); }
+
+  .countdown-wrap { display: flex; gap: clamp(12px, 4vw, 24px); justify-content: center; margin-top: 38px; flex-wrap: wrap; }
+  .count-box { background: rgba(10,3,20,0.6); backdrop-filter: blur(4px); padding: 8px 16px; border-radius: 32px; border: 0.5px solid rgba(245,200,66,0.5); min-width: 70px; text-align: center; }
+  .count-num { font-family: 'Cinzel', serif; font-size: clamp(1.3rem, 5vw, 2.2rem); font-weight: 600; color: var(--gold-light); }
+  .count-label { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+  .music-btn { margin-top: 28px; padding: 10px 28px; border: 1px solid var(--gold); background: transparent; color: var(--gold-light); font-family: 'Cinzel', serif; cursor: pointer; border-radius: 40px; transition: 0.3s; }
+  .music-btn:hover { background: var(--violet-mid); border-color: var(--violet-light); box-shadow: 0 0 18px rgba(168,85,247,0.6); }
+
+  .section { padding: 70px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.35em; color: var(--gold); text-align: center; margin-bottom: 12px; text-transform: uppercase; }
+  .section-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 300; font-style: italic; text-align: center; color: white; }
+
+  .events-list { margin-top: 44px; display: flex; flex-direction: column; gap: 24px; }
+  .event-item {
+    background: linear-gradient(135deg, rgba(245,200,66,0.12), rgba(201,150,10,0.05));
+    backdrop-filter: blur(12px);
+    border-radius: 32px;
+    display: grid;
+    grid-template-columns: 68px 1fr auto;
+    align-items: center;
+    column-gap: 14px;
+    padding: 20px 28px;
+    border: 1px solid rgba(245,200,66,0.5);
+    transition: 0.3s;
+  }
+  .event-item:hover { border-color: var(--gold); box-shadow: 0 8px 25px rgba(245,200,66,0.2); transform: translateY(-2px); }
+  .event-num { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 600; color: var(--gold); width: 65px; text-align: center; }
+  .event-details h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--gold-light); }
+  .event-date, .event-time { font-size: 0.92rem; color: rgba(255,245,200,0.88); margin-top: 4px; letter-spacing: 0.01em; }
+  .event-time { color: rgba(255,245,200,0.95); font-weight: 600; }
+  .event-badge { font-size: 2.2rem; }
+
+  .venue-inner { display: flex; flex-direction: column; gap: 28px; margin-top: 32px; }
+  .venue-card { background: rgba(15,5,32,0.8); backdrop-filter: blur(8px); border-radius: 32px; padding: 24px 28px; border: 1px solid rgba(245,200,66,0.5); box-shadow: 0 10px 25px -8px black; }
+  .venue-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 10px; }
+  .venue-card p { color: #f0e6d2; line-height: 1.5; text-shadow: 0 1px 1px rgba(0,0,0,0.3); }
+  .map-link { color: var(--gold); text-decoration: none; font-size: 0.85rem; border-bottom: 1px dashed; display: inline-block; margin-top: 10px; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px; margin-top: 44px; }
+  .gallery-item { border-radius: 28px; overflow: hidden; aspect-ratio: 4/5; background: rgba(255,255,255,0.05); box-shadow: 0 20px 30px -12px black; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+  .gallery-item:hover img { transform: scale(1.05); }
+  .video-wrap { margin-top: 32px; border-radius: 32px; overflow: hidden; box-shadow: 0 25px 35px -12px black; }
+  video { width: 100%; display: block; border-radius: 28px; }
+
+  .invited-by { background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(30,20,50,0.7)); backdrop-filter: blur(10px); border-radius: 36px; padding: 32px 28px; margin-top: 30px; text-align: center; border: 1px solid rgba(245,200,66,0.5); }
+  .invited-by h3 { font-family: 'Cinzel', serif; color: #ffdf99; font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 20px; text-shadow: 0 0 8px rgba(245,200,66,0.6); }
+  .family-names { display: flex; justify-content: center; gap: 45px; flex-wrap: wrap; }
+  .family-member .role { font-size: 0.75rem; color: #ffd966; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; margin-bottom: 5px; }
+  .family-member .name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #fff5e0; font-weight: 600; text-shadow: 0 1px 2px black; }
+
+  .contact-info { background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(40,25,70,0.7)); backdrop-filter: blur(10px); border-radius: 36px; padding: 28px; text-align: center; margin-top: 30px; border: 1px solid rgba(245,200,66,0.5); }
+  .contact-info h4 { font-family: 'Cinzel', serif; color: #ffe0a3; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 18px; }
+  .contact-numbers { display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; }
+  .contact-numbers span { font-size: 1.2rem; color: #fff2cc; font-weight: 700; font-family: monospace; background: rgba(0,0,0,0.3); padding: 6px 16px; border-radius: 50px; }
+
+  .whatsapp-share { margin: 30px auto 0; text-align: center; }
+  .whatsapp-btn { background: #25D366; padding: 14px 32px; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; color: white; font-family: 'Cinzel', serif; text-decoration: none; font-weight: bold; letter-spacing: 1px; transition: 0.3s; box-shadow: 0 5px 20px rgba(37,211,102,0.4); border: none; cursor: pointer; font-size: 1rem; }
+  .whatsapp-btn:hover { transform: scale(1.05); background: #20b859; }
+
+  footer { text-align: center; padding: 58px 24px 48px; border-top: 0.5px solid rgba(245,200,66,0.2); margin-top: 20px; color: #ffe6b3; }
+  .creator-credit {
+    margin: 22px auto 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.32);
+    border: 1px solid rgba(245,200,66,0.35);
+  }
+  .creator-photo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(245,200,66,0.8);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+  }
+  .creator-text {
+    font-family: 'Cinzel', serif;
+    color: #ffe8b6;
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @keyframes floatPetal {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    15% { opacity: 0.9; }
+    85% { opacity: 0.7; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+  .petal { position: absolute; pointer-events: none; z-index: 1; }
+
+  @media (max-width: 700px) {
+    .event-item { grid-template-columns: 1fr; text-align: center; gap: 8px; padding: 18px 18px; }
+    .event-num { width: auto; }
+    .family-names { gap: 25px; }
+    .contact-numbers { gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- RINGS SPLASH -->
+<div id="ringsSplash" class="rings-splash">
+  <div class="rings-container">
+    <div id="ringLeft" class="ring ring-left"><div class="ring-inner">💍</div></div>
+    <div id="ringRight" class="ring ring-right"><div class="ring-inner">💍</div></div>
+    <div id="sparkEffect" class="collision-spark"></div>
+  </div>
+  <div class="rings-message" id="ringsMessage">✨ Two souls, one beautiful destiny... ✨</div>
+  <button id="inviteButton" class="invite-btn">✨ OPEN INVITATION ✨</button>
+</div>
+
+<!-- MAIN WEDDING WEBSITE -->
+<div id="mainContent" class="main-wedding-content">
+  <!-- YOUR GITHUB MUSIC - DIRECT RAW URL -->
+  <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
+    <source src="https://raw.githubusercontent.com/shaikmustafa77/musta-salma-wedding/main/Wedding%20card%20video%20-%20invitation%20card%20video%20-%20pelli%20subhalekha%20video%20invitation%20%23weddinginvites.mp3" type="audio/mpeg">
+  </audio>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">You are cordially invited to celebrate</p>
+      <h1 class="hero-names">
+        <span class="groom">Banoth Devendar</span>
+        <em>♡ weds ♡</em>
+        <span class="bride">Sandhya</span>
+      </h1>
+      <div class="cute-line">💖 “Sealed with a kiss, blessed by the stars — our forever begins.” 💖</div>
+      <p class="hero-date" id="heroDate"></p>
+      <div class="ornament"><div class="ornament-diamond"></div></div>
+      <div class="countdown-wrap" id="countdownArea">
+        <div class="count-box"><span class="count-num" id="days">00</span><span class="count-label">Days</span></div>
+        <div class="count-box"><span class="count-num" id="hours">00</span><span class="count-label">Hours</span></div>
+        <div class="count-box"><span class="count-num" id="minutes">00</span><span class="count-label">Mins</span></div>
+        <div class="count-box"><span class="count-num" id="seconds">00</span><span class="count-label">Secs</span></div>
+      </div>
+      <button id="musicControlBtn" class="music-btn">♫ Pause Music</button>
+    </div>
+  </section>
+
+  <div class="section reveal">
+    <p class="section-title">Our journey</p>
+    <h2 class="section-heading">Moments We Cherish</h2>
+    <div class="ornament"><div class="ornament-diamond"></div></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img id="img1" alt="memory" src="./photo-1.jpg"></div>
+      <div class="gallery-item"><img id="img2" alt="memory" src="./photo-2.jpg"></div>
+      <div class="gallery-item"><img id="img3" alt="memory" src="./photo-3.jpg"></div>
+    </div>
+  </div>
+
+  <div class="section reveal">
+    <div style="max-width:900px; margin:0 auto;">
+      <p class="section-title">Our Story</p>
+      <h2 class="section-heading">A Love Worth Celebrating</h2>
+      <div class="ornament"><div class="ornament-diamond"></div></div>
+      <div class="video-wrap">
+        <video playsinline controls style="width:100%; border-radius:28px;">
+          <source src="./video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS SECTION -->
+  <div class="section reveal">
+    <p class="section-title">Schedule</p>
+    <h2 class="section-heading">Wedding Celebrations</h2>
+    <div class="ornament"><div class="ornament-diamond"></div></div>
+    <div class="events-list" id="eventsContainer"></div>
+  </div>
+
+  <!-- VENUES -->
+  <div class="section reveal">
+    <p class="section-title">Venues</p>
+    <h2 class="section-heading">Where To Find Us</h2>
+    <div class="ornament"><div class="ornament-diamond"></div></div>
+    <div class="venue-inner" id="venuesContainer"></div>
+  </div>
+
+  <!-- INVITED BY & CONTACT -->
+  <div class="section reveal">
+    <div class="invited-by">
+      <h3>✨ Invited by ✨</h3>
+      <div class="family-names">
+        <div class="family-member"><div class="role">Father</div><div class="name">Banoth Rangilal</div></div>
+        <div class="family-member"><div class="role">Mother</div><div class="name">Banoth Badhri</div></div>
+        <div class="family-member"><div class="role">Brother</div><div class="name">Banoth Vinod Kumar</div></div>
+      </div>
+    </div>
+    
+    <div class="contact-info">
+      <h4>📞 CONTACT US</h4>
+      <div class="contact-numbers">
+        <span>📱 7330771954</span>
+        <span>📱 7673968436</span>
+      </div>
+    </div>
+
+    <div class="whatsapp-share">
+      <button id="whatsappShareBtn" class="whatsapp-btn">
+        💬 Share via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="f-names">Banoth Devendar ♡ Dharavath Sandhya</div>
+    <div class="ornament"><div class="ornament-diamond"></div></div>
+    <p id="footerDate"></p>
+    <p>With love & gratitude</p>
+    <div class="creator-credit">
+      <img src="./vijay pic.jpeg" alt="Banoth Vijay Kumar" class="creator-photo">
+      <p class="creator-text">This website created by Banoth Vijay Kumar</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // ========== DATA ==========
+  const weddingData = {
+    events: [
+      { name: "💍 Engagement", dateTime: "22 April 2026 (Wednesday) at 3:00 PM", emoji: "💍" },
+      { name: "💒 Wedding", dateTime: "6 May 2026 (Wednesday) at 2:28 AM", emoji: "🤵👰" },
+      { name: "🥂 Reception", dateTime: "7 May 2026 (Thursday) at 12:30 PM", emoji: "🥂🎉" }
+    ],
+    venues: [
+      { name: "Wedding Venue", desc: "Wedding Ceremony", address: "Maripeda, Telangana, India", mapLink: "https://www.google.com/maps?q=17.392705,79.923635", embedLink: "https://www.google.com/maps?q=17.392705,79.923635&z=17&output=embed", lat: 17.392705, lng: 79.923635 },
+      { name: "Reception Venue", desc: "Reception", address: "Vinod kumar home, H3W7+QRV, Unnamed Road, Uppalapadu, Telangana 507211, India", mapLink: "https://www.google.com/maps?q=Vinod%20kumar%20home%2C%20H3W7%2BQRV%2C%20Unnamed%20Road%2C%20Uppalapadu%2C%20Telangana%20507211%2C%20India", embedLink: "https://www.google.com/maps?q=Vinod%20kumar%20home%2C%20H3W7%2BQRV%2C%20Unnamed%20Road%2C%20Uppalapadu%2C%20Telangana%20507211%2C%20India&z=17&output=embed", lat: 17.596952, lng: 80.064688 }
+    ]
+  };
+
+  // Set dates
+  const wDate = new Date(2026, 4, 6, 2, 28, 0);
+  const dateStr = wDate.toLocaleDateString("en-US", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+  document.getElementById("heroDate").innerHTML = dateStr;
+  document.getElementById("footerDate").innerHTML = dateStr.toUpperCase();
+
+  // Render Events
+  const eventsContainer = document.getElementById("eventsContainer");
+  weddingData.events.forEach((ev, idx) => {
+    const [datePart, timePart] = ev.dateTime.split(" at ");
+    const div = document.createElement("div"); div.className = "event-item reveal";
+    div.innerHTML = `<span class="event-num">0${idx+1}</span><div class="event-details"><h3>${ev.name}</h3><p class="event-date">📅 ${datePart}</p><p class="event-time">🕒 ${timePart}</p></div><div class="event-badge">${ev.emoji}</div>`;
+    eventsContainer.appendChild(div);
+  });
+
+  // Render Venues with Google Maps
+  const venuesContainer = document.getElementById("venuesContainer");
+  weddingData.venues.forEach((venue) => {
+    const mapsEmbedUrl = venue.embedLink || `https://www.google.com/maps?q=${venue.lat},${venue.lng}&output=embed`;
+    const card = document.createElement("div"); card.className = "venue-card reveal";
+    card.innerHTML = `
+      <h3>📍 ${venue.name}</h3>
+      <p><strong>${venue.desc}</strong></p>
+      <p>${venue.address}</p>
+      <a href="${venue.mapLink}" target="_blank" rel="noopener noreferrer" style="display:block;">
+        <iframe width="100%" height="200" style="border-radius:20px; margin-top:12px; border:1px solid #f5c84266;" frameborder="0" src="${mapsEmbedUrl}" allowfullscreen></iframe>
+      </a>
+      <a href="${venue.mapLink}" target="_blank" rel="noopener noreferrer" class="map-link">🗺️ Open Location →</a>
+    `;
+    venuesContainer.appendChild(card);
+  });
+
+  // Countdown
+  function updateCountdown() {
+    const target = wDate.getTime();
+    const diff = target - Date.now();
+    if (diff < 0) { document.getElementById("countdownArea").innerHTML = '<div style="color:var(--gold-light);">✨ Celebration ongoing ✨</div>'; return; }
+    document.getElementById("days").innerText = String(Math.floor(diff / 864e5)).padStart(2,'0');
+    document.getElementById("hours").innerText = String(Math.floor((diff % 864e5) / 36e5)).padStart(2,'0');
+    document.getElementById("minutes").innerText = String(Math.floor((diff % 36e5) / 6e4)).padStart(2,'0');
+    document.getElementById("seconds").innerText = String(Math.floor((diff % 6e4) / 1e3)).padStart(2,'0');
+  }
+  setInterval(updateCountdown, 1000); updateCountdown();
+
+  // ========== RINGS COLLISION ==========
+  const splashDiv = document.getElementById("ringsSplash");
+  const ringLeft = document.getElementById("ringLeft"), ringRight = document.getElementById("ringRight");
+  const sparkDiv = document.getElementById("sparkEffect");
+  const inviteBtn = document.getElementById("inviteButton");
+  const mainContent = document.getElementById("mainContent");
+  const ringsMessage = document.getElementById("ringsMessage");
+  let animFrame = null, start = null, collided = false;
+  
+  function animateCollision(timestamp) {
+    if (!start) start = timestamp;
+    const elapsed = (timestamp - start) / 1000;
+    const duration = 1.7;
+    let progress = Math.min(1, elapsed / duration);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const container = document.querySelector('.rings-container');
+    const cWidth = container.clientWidth;
+    const ringW = window.innerWidth < 768 ? 160 : 190;
+    const centerPos = (cWidth / 2) - (ringW / 2);
+    
+    if (!collided && progress >= 0.96) {
+      collided = true;
+      sparkDiv.style.width = "150px"; sparkDiv.style.height = "150px";
+      sparkDiv.style.left = "50%"; sparkDiv.style.top = "50%";
+      sparkDiv.style.transform = "translate(-50%, -50%)";
+      sparkDiv.style.opacity = "1";
+      setTimeout(() => { sparkDiv.style.opacity = "0"; sparkDiv.style.width = "0"; sparkDiv.style.height = "0"; }, 500);
+      ringsMessage.innerHTML = "⚡ When two rings become one heart... ⚡";
+      ringsMessage.style.color = "#ffea99";
+      setTimeout(() => { inviteBtn.classList.add("reveal-invite"); ringsMessage.innerHTML = "💫 You are cordially invited 💫"; }, 400);
+    }
+    
+    if (progress < 0.94) {
+      const offset = 10 + (centerPos - 10) * ease;
+      ringLeft.style.left = `${offset}px`;
+      ringLeft.style.right = "auto";
+      ringRight.style.right = `${offset}px`;
+      ringRight.style.left = "auto";
+    } else {
+      ringLeft.style.left = `${centerPos - 8}px`;
+      ringRight.style.right = `${centerPos - 8}px`;
+    }
+    if (progress < 1) animFrame = requestAnimationFrame(animateCollision);
+    else cancelAnimationFrame(animFrame);
+  }
+  
+  function startRings() { start = null; collided = false; inviteBtn.classList.remove("reveal-invite"); ringLeft.style.left = "10px"; ringRight.style.right = "10px"; animFrame = requestAnimationFrame(animateCollision); }
+  startRings();
+
+  // ========== MUSIC & INVITE ==========
+  const bgMusic = document.getElementById("bgMusic");
+  const storyVideo = document.querySelector(".video-wrap video");
+  let musicPlaying = false;
+  const musicControl = document.getElementById("musicControlBtn");
+  
+  function revealWebsite() {
+    mainContent.classList.add("visible-main");
+    splashDiv.style.transition = "opacity 0.9s";
+    splashDiv.style.opacity = "0";
+    setTimeout(() => { splashDiv.style.display = "none"; }, 900);
+    
+    // Play music from GitHub
+    bgMusic.play().then(() => {
+      musicPlaying = true;
+      musicControl.innerHTML = "♫ Pause Music";
+    }).catch((e) => {
+      console.log("Auto-play prevented:", e);
+      musicControl.innerHTML = "♩ Play Music";
+    });
+    
+    setTimeout(() => {
+      document.querySelectorAll(".main-wedding-content .reveal").forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add("visible");
+      });
+      addPetals();
+    }, 200);
+  }
+  
+  inviteBtn.addEventListener("click", (e) => { e.preventDefault(); revealWebsite(); });
+  
+  musicControl.addEventListener("click", () => {
+    if (musicPlaying) { bgMusic.pause(); musicControl.innerHTML = "♩ Play Music"; }
+    else { bgMusic.play().catch(e=>console.log); musicControl.innerHTML = "♫ Pause Music"; }
+    musicPlaying = !musicPlaying;
+  });
+
+  // Stop background music when user plays the video
+  if (storyVideo) {
+    storyVideo.addEventListener("play", () => {
+      if (!bgMusic.paused) bgMusic.pause();
+      musicPlaying = false;
+      musicControl.innerHTML = "♩ Play Music";
+    });
+  }
+  
+  // ========== WHATSAPP SHARE ==========
+  const shareBtn = document.getElementById("whatsappShareBtn");
+  const shareMessage = `🎉 *Wedding Invitation* 🎉\n\nYou're invited to celebrate with *Banoth Devendar* & *Dharavath Sandhya*.\n\n💍 Engagement\n📅 22 April 2026 at 3:00 PM\n\n💍 Wedding Ceremony\n📅 6 May 2026 at 2:28 AM\n\n🥂 Reception\n📅 7 May 2026 at 12:30 PM\n\n📍 Venues:\n• Wedding Venue: Maripeda, Telangana, India\n• Reception Venue: Vinod kumar home, Uppalapadu, Telangana 507211\n\nJoin us to celebrate love! 💕\n\nRSVP: 6302708295 / 8790330479`;
+  shareBtn.addEventListener("click", () => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(shareMessage)}`, '_blank');
+  });
+  
+  // Observer for reveals
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.15 });
+  const mainObserver = new MutationObserver(() => {
+    if (mainContent.classList.contains("visible-main")) {
+      document.querySelectorAll(".main-wedding-content .reveal").forEach(el => observer.observe(el));
+      mainObserver.disconnect();
+    }
+  });
+  mainObserver.observe(mainContent, { attributes: true, attributeFilter: ["class"] });
+  
+  function addPetals() {
+    const hero = document.querySelector(".hero");
+    if (!hero) return;
+    hero.style.position = "relative"; hero.style.overflow = "hidden";
+    for (let i=0;i<22;i++) {
+      let p = document.createElement("div");
+      p.classList.add("petal");
+      p.style.width = `${5+Math.random()*10}px`; p.style.height = `${8+Math.random()*14}px`;
+      p.style.background = `radial-gradient(ellipse, rgba(168,85,247,0.6), rgba(245,200,66,0.3))`;
+      p.style.borderRadius = "50% 0 50% 0";
+      p.style.left = `${Math.random()*100}%`; p.style.top = `${Math.random()*100}%`;
+      p.style.animation = `floatPetal ${6+Math.random()*12}s linear infinite`;
+      p.style.animationDelay = `${Math.random()*9}s`;
+      hero.appendChild(p);
+    }
+  }
+  
+  bgMusic.load();
+  window.addEventListener("resize", () => { if (splashDiv.style.display !== "none") startRings(); });
+</script>
+</body>
+</html>
