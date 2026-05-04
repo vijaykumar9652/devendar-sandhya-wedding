@@ -444,9 +444,9 @@
   // ========== DATA ==========
   const weddingData = {
     events: [
-      { name: "💍 Engagement", dateTime: "22 April 2026 (Wednesday) at 3:00 PM", emoji: "💍" },
-      { name: "💒 Wedding", dateTime: "6 May 2026 (Wednesday) at 2:28 AM", emoji: "🤵👰" },
-      { name: "🥂 Reception", dateTime: "7 May 2026 (Thursday) at 12:30 PM", emoji: "🥂🎉" }
+      { name: "💍 Engagement", dateTime: "22 April 2026 at 3:00 PM", emoji: "💍" },
+      { name: "💒 Wedding", dateTime: "5 May 2026 at 2:28 AM", emoji: "🤵👰" },
+      { name: "🥂 Reception", dateTime: "7 May 2026 at 12:30 PM", emoji: "🥂🎉" }
     ],
     venues: [
       { name: "Wedding Venue", desc: "Wedding Ceremony", address: "Maripeda, Telangana, India", mapLink: "https://www.google.com/maps?q=17.392705,79.923635", embedLink: "https://www.google.com/maps?q=17.392705,79.923635&z=17&output=embed", lat: 17.392705, lng: 79.923635 },
@@ -595,7 +595,7 @@
   
   // ========== WHATSAPP SHARE ==========
   const shareBtn = document.getElementById("whatsappShareBtn");
-  const shareMessage = `🎉 *Wedding Invitation* 🎉\n\nYou're invited to celebrate with *Banoth Devendar* & *Dharavath Sandhya*.\n\n💍 Engagement\n📅 22 April 2026 at 3:00 PM\n\n💍 Wedding Ceremony\n📅 6 May 2026 at 2:28 AM\n\n🥂 Reception\n📅 7 May 2026 at 12:30 PM\n\n📍 Venues:\n• Wedding Venue: Maripeda, Telangana, India\n• Reception Venue: Vinod kumar home, Uppalapadu, Telangana 507211\n\nJoin us to celebrate love! 💕\n\nRSVP: 6302708295 / 8790330479`;
+  const shareMessage = `🎉 *Wedding Invitation* 🎉\n\nYou're invited to celebrate with *Banoth Devendar* & *Dharavath Sandhya*.\n\n💍 Engagement\n📅 22 April 2026 at 3:00 PM\n\n💍 Wedding Ceremony\n📅 5 May 2026 at 2:28 AM\n\n🥂 Reception\n📅 7 May 2026 at 12:30 PM\n\n📍 Venues:\n• Wedding Venue: Maripeda, Telangana, India\n• Reception Venue: Vinod kumar home, Uppalapadu, Telangana 507211\n\nJoin us to celebrate love! 💕\n\nRSVP: 6302708295 / 8790330479`;
   shareBtn.addEventListener("click", () => {
     window.open(`https://wa.me/?text=${encodeURIComponent(shareMessage)}`, '_blank');
   });
